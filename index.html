@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Clock Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Logical Clock Visualization</h1>
+        <h2>Lamport & Vector Clocks</h2>
+        
+        <div class="controls">
+            <button id="reset-btn">Reset All</button>
+            <button id="toggle-vector-clocks">Toggle Vector Clocks</button>
+            <button id="toggle-physical-clocks">Show Physical Clocks</button>
+            <button id="toggle-network-delays">Show Network Delays</button>
+            <button id="add-process-btn">Add Process</button>
+            <button id="remove-process-btn">Remove Process</button>
+            <label>
+                <input type="checkbox" id="show-ordering"> Show Event Ordering
+            </label>
+            <label>
+                <input type="checkbox" id="show-causality-graph"> Show Causality Graph
+            </label>
+        </div>
+
+        <div class="processes-container">
+            <div class="process" id="process-0">
+                <h3>Process A</h3>
+                <button class="event-btn" data-process="0">Generate Event</button>
+                <div class="clock-info">
+                    <div class="lamport-clock">Lamport: <span class="lamport-value">0</span></div>
+                    <div class="vector-clock">Vector: <span class="vector-value">[0,0,0]</span></div>
+                    <div class="physical-clock">Physical: <span class="physical-value">0ms</span></div>
+                </div>
+                <div class="events-timeline"></div>
+            </div>
+
+            <div class="process" id="process-1">
+                <h3>Process B</h3>
+                <button class="event-btn" data-process="1">Generate Event</button>
+                <div class="clock-info">
+                    <div class="lamport-clock">Lamport: <span class="lamport-value">0</span></div>
+                    <div class="vector-clock">Vector: <span class="vector-value">[0,0,0]</span></div>
+                    <div class="physical-clock">Physical: <span class="physical-value">0ms</span></div>
+                </div>
+                <div class="events-timeline"></div>
+            </div>
+
+            <div class="process" id="process-2">
+                <h3>Process C</h3>
+                <button class="event-btn" data-process="2">Generate Event</button>
+                <div class="clock-info">
+                    <div class="lamport-clock">Lamport: <span class="lamport-value">0</span></div>
+                    <div class="vector-clock">Vector: <span class="vector-value">[0,0,0]</span></div>
+                    <div class="physical-clock">Physical: <span class="physical-value">0ms</span></div>
+                </div>
+                <div class="events-timeline"></div>
+            </div>
+        </div>
+
+        <div class="communication-controls">
+            <h3>Message Sending</h3>
+            <div class="message-controls">
+                <select id="sender-process">
+                    <option value="0">Process A</option>
+                    <option value="1">Process B</option>
+                    <option value="2">Process C</option>
+                </select>
+                <span>→</span>
+                <select id="receiver-process">
+                    <option value="0">Process A</option>
+                    <option value="1">Process B</option>
+                    <option value="2">Process C</option>
+                </select>
+                <button id="send-message-btn">Send Message</button>
+                <div class="delay-controls">
+                    <label>Network Delay: <input type="range" id="network-delay-slider" min="0" max="5000" value="1000"> <span id="delay-value">1000ms</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-controls">
+            <h3>Data Management</h3>
+            <div class="export-import-controls">
+                <button id="export-btn">Export System State</button>
+                <input type="file" id="import-file" accept=".json" style="display: none;">
+                <button id="import-btn">Import System State</button>
+                <button id="export-events-csv">Export Events (CSV)</button>
+            </div>
+        </div>
+
+        <div class="global-timeline">
+            <h3>Global Event Timeline</h3>
+            <div class="timeline-container">
+                <div class="timeline"></div>
+            </div>
+        </div>
+
+        <div class="causality-graph" style="display: none;">
+            <h3>Event Causality Graph</h3>
+            <div class="graph-container">
+                <canvas id="causality-canvas" width="800" height="400"></canvas>
+                <div class="graph-legend">
+                    <div><span class="legend-dot internal"></span> Internal Events</div>
+                    <div><span class="legend-dot send"></span> Send Events</div>
+                    <div><span class="legend-dot receive"></span> Receive Events</div>
+                    <div><span class="legend-line"></span> Happened-before</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="performance-metrics">
+            <h3>Performance Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Total Events</h4>
+                    <span id="total-events">0</span>
+                </div>
+                <div class="metric-card">
+                    <h4>Messages Sent</h4>
+                    <span id="messages-sent">0</span>
+                </div>
+                <div class="metric-card">
+                    <h4>Concurrent Events</h4>
+                    <span id="concurrent-events">0</span>
+                </div>
+                <div class="metric-card">
+                    <h4>Max Clock Drift</h4>
+                    <span id="max-clock-drift">0ms</span>
+                </div>
+                <div class="metric-card">
+                    <h4>Avg Network Delay</h4>
+                    <span id="avg-network-delay">0ms</span>
+                </div>
+                <div class="metric-card">
+                    <h4>System Uptime</h4>
+                    <span id="system-uptime">0s</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
