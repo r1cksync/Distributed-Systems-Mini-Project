@@ -8,6 +8,8 @@ A web-based interactive visualization that demonstrates logical clocks, event or
 
 
 
+<img width="4038" height="2727" alt="image" src="https://github.com/user-attachments/assets/b353b859-35c3-42a1-a02b-3de66a7cad70" />
+
 
 
 This repository contains a self-contained client-side application implemented with HTML, CSS and JavaScript intended for educational use and demonstration.
